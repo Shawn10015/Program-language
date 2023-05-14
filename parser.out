@@ -1,0 +1,153 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    TIMES
+
+Grammar
+
+Rule 0     S' -> expression
+Rule 1     expression -> DECLARE ID factor
+Rule 2     expression -> expression PLUS term
+Rule 3     expression -> term
+Rule 4     term -> factor
+Rule 5     factor -> NUMBER
+Rule 6     factor -> CURRENCY
+Rule 7     factor -> ID
+
+Terminals, with rules where they appear
+
+CURRENCY             : 6
+DECLARE              : 1
+ID                   : 1 7
+NUMBER               : 5
+PLUS                 : 2
+TIMES                : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+expression           : 2 0
+factor               : 1 4
+term                 : 2 3
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . expression
+    (1) expression -> . DECLARE ID factor
+    (2) expression -> . expression PLUS term
+    (3) expression -> . term
+    (4) term -> . factor
+    (5) factor -> . NUMBER
+    (6) factor -> . CURRENCY
+    (7) factor -> . ID
+
+    DECLARE         shift and go to state 2
+    NUMBER          shift and go to state 6
+    CURRENCY        shift and go to state 7
+    ID              shift and go to state 3
+
+    expression                     shift and go to state 1
+    factor                         shift and go to state 4
+    term                           shift and go to state 5
+
+state 1
+
+    (0) S' -> expression .
+    (2) expression -> expression . PLUS term
+
+    PLUS            shift and go to state 8
+
+
+state 2
+
+    (1) expression -> DECLARE . ID factor
+
+    ID              shift and go to state 9
+
+
+state 3
+
+    (7) factor -> ID .
+
+    PLUS            reduce using rule 7 (factor -> ID .)
+    $end            reduce using rule 7 (factor -> ID .)
+
+
+state 4
+
+    (4) term -> factor .
+
+    PLUS            reduce using rule 4 (term -> factor .)
+    $end            reduce using rule 4 (term -> factor .)
+
+
+state 5
+
+    (3) expression -> term .
+
+    PLUS            reduce using rule 3 (expression -> term .)
+    $end            reduce using rule 3 (expression -> term .)
+
+
+state 6
+
+    (5) factor -> NUMBER .
+
+    PLUS            reduce using rule 5 (factor -> NUMBER .)
+    $end            reduce using rule 5 (factor -> NUMBER .)
+
+
+state 7
+
+    (6) factor -> CURRENCY .
+
+    PLUS            reduce using rule 6 (factor -> CURRENCY .)
+    $end            reduce using rule 6 (factor -> CURRENCY .)
+
+
+state 8
+
+    (2) expression -> expression PLUS . term
+    (4) term -> . factor
+    (5) factor -> . NUMBER
+    (6) factor -> . CURRENCY
+    (7) factor -> . ID
+
+    NUMBER          shift and go to state 6
+    CURRENCY        shift and go to state 7
+    ID              shift and go to state 3
+
+    term                           shift and go to state 10
+    factor                         shift and go to state 4
+
+state 9
+
+    (1) expression -> DECLARE ID . factor
+    (5) factor -> . NUMBER
+    (6) factor -> . CURRENCY
+    (7) factor -> . ID
+
+    NUMBER          shift and go to state 6
+    CURRENCY        shift and go to state 7
+    ID              shift and go to state 3
+
+    factor                         shift and go to state 11
+
+state 10
+
+    (2) expression -> expression PLUS term .
+
+    PLUS            reduce using rule 2 (expression -> expression PLUS term .)
+    $end            reduce using rule 2 (expression -> expression PLUS term .)
+
+
+state 11
+
+    (1) expression -> DECLARE ID factor .
+
+    PLUS            reduce using rule 1 (expression -> DECLARE ID factor .)
+    $end            reduce using rule 1 (expression -> DECLARE ID factor .)
+
